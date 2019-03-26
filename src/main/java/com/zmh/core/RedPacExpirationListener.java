@@ -15,11 +15,6 @@ import java.util.Arrays;
 @Service
 public class RedPacExpirationListener extends KeyExpirationEventMessageListener {
 
-    /**
-     * Creates new {@link MessageListener} for {@code __keyevent@*__:expired} messages.
-     *
-     * @param listenerContainer must not be {@literal null}.
-     */
     public RedPacExpirationListener(RedisMessageListenerContainer listenerContainer) {
         super(listenerContainer);
     }

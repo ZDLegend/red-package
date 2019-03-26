@@ -14,35 +14,33 @@ public class CacheManage {
     /**
      * 红包ID - 抢红包列表
      */
-    private static ConcurrentHashMap<String, GettedPackageUserGroup> datas;
+    private static ConcurrentHashMap<String, GettedPackageUserGroup> data = new ConcurrentHashMap<>();
 
     public static GettedPackageUserGroup greatRedPackage(int size){
         GettedPackageUserGroup redPackage = new GettedPackageUserGroup(size);
-        datas.put(redPackage.getPackageID(), redPackage);
+        data.put(redPackage.getPackageID(), redPackage);
         return redPackage;
     }
 
     public static void removeOverdueRedPackage(String redPackId){
-        if(datas.containsKey(redPackId)){
-            datas.remove(redPackId);
-        }
+        data.remove(redPackId);
     }
 
     public static boolean checkUser(String packageId){
         String ip = WebUtil.getIpAddr();
-        GettedPackageUserGroup redPackage = datas.get(packageId);
+        GettedPackageUserGroup redPackage = data.get(packageId);
         return redPackage.check(ip);
     }
 
     public static boolean addUser(String packageId){
         String ip = WebUtil.getIpAddr();
-        GettedPackageUserGroup redPackage = datas.get(packageId);
+        GettedPackageUserGroup redPackage = data.get(packageId);
         return redPackage.addList(ip);
     }
 
     public static void deleteUser(String packageId){
         String ip = WebUtil.getIpAddr();
-        GettedPackageUserGroup redPackage = datas.get(packageId);
+        GettedPackageUserGroup redPackage = data.get(packageId);
         redPackage.deleteUser(ip);
     }
 }

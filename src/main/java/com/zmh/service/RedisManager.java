@@ -21,11 +21,6 @@ public class RedisManager {
 
     private ExecutorService pool;
 
-    /**
-     * 一天过期
-     */
-    private static long timeOut = 1;
-
     @PostConstruct
     public void init(){
        /* 开启事务 */
@@ -42,6 +37,10 @@ public class RedisManager {
      * 发红包
      */
     public void addRedPackage(String id, LeftMoneyPackage leftMoneyPackage){
+        /*
+         * 一天过期
+         */
+        long timeOut = 1;
         stringRedisTemplate.opsForValue().set(id, leftMoneyPackage.toJson(), TimeUnit.DAYS.toDays(timeOut));
     }
 
